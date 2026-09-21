@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="todo-app">
+        <h1 class="title">Todo Task's</h1>
+        <h4 class="sub-title"><span class="date" id="currentDate">Sunday, 20 September 2026</span></h4>
+
+        <div class="todo-app-container">
+            <div class="todo-app-task-input-container">
+                <input type="text" class="todo-app-task-input" id="taskinputTodo" required placeholder="Add a task">
+                <button class="todo-app-task-input-button" id="addTask">Add</button>
+            </div>
+           
+           
+            <p id="taskInputerror"></p> 
+                    
+               <div class="todo-app-container-task">
+                <div class="todo-app-container-task-contain">
+                    <div class="todo-app-container-task-filters">
+                        <button class="btn-filter active" data-filter="all">All</button>
+                           <button class="btn-filter" data-filter="active">Task</button>
+                             <button class="btn-filter" data-filter="completed">Complete</button>
+                    </div>
+                    <div class="todo-app-container-task-counter">
+                        <span class="count" id="taskCount">0</span> task left
+                    </div>
+                </div>
+
+                <ul class="todo-app-container-task-list" id="taskList">
+                        
+                </ul>
+
+                <div class="todo-app-container-task-status" id="taskStatus">
+                        <div id="empty" style="display: none;">
+                            <div class="icon">
+                                <img src="./img/empty-tasks-light.svg" class="icon-img" alt="">
+                    </div>  
+                    <div class="icon-text">
+                             <h4 class="title">No tasks yet</h4>
+                           <p class="sub-title">Add your to-dos</p>
+                    </div>
+
+                        </div>
+
+                        <div id="complete" style="display: none;">
+                            <div class="icon">
+                                <img src="./img/all-tasks-completed-light.svg" class="icon-img" alt="">
+                        </div>  
+                    <div class="icon-text">
+                           <h4 class="status-title">All tasks complete</h4>
+                           <p class="status-sub-title">Nice work!</p>
+                    </div>
+
+                        </div>
+                </div>
+
+
+
+              
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
