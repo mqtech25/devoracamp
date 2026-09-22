@@ -21,9 +21,10 @@ const filterBtn = document.querySelectorAll('.btn-filter');
 const taskStatus = document.getElementById('taskStatus');
 
  
-let taskArry = JSON.parse(localStorage.getItem('taskArry')) || [];
+let taskArry =[];
 
 let editingTaskId = null;
+
 
 randerTask();
 
@@ -41,8 +42,6 @@ addTask.addEventListener('click',function(e){
     }
        
        taskArry.push(taskListObj)
-localStorage.setItem('taskArry',JSON.stringify(taskArry));
-
         taskinputTodo.value =""
     }
 
@@ -98,8 +97,7 @@ function saveTaskEdit(){
         const taskFiltered= taskArry.find(taskId=> taskId.taskListObjId === Number(editingTaskId))
 
            if(taskFiltered){
-            taskFiltered.taskListObjTodo = editingTaskIdElem.innerText.trim();
-            localStorage.setItem('taskArry',JSON.stringify(taskArry))
+            taskFiltered.taskListObjTodo = editingTaskIdElem.innerText.trim()
            }
 
         randerTask()
@@ -113,8 +111,7 @@ function deleteTask(e){
         return task.taskListObjId !== Number(taskDelId)
     })
 
-    taskArry = newtaskArry;
-     localStorage.setItem('taskArry',JSON.stringify(taskArry))
+    taskArry = newtaskArry
     randerTask();
 
     
@@ -131,8 +128,6 @@ function completeTask(e){
         }else{
             completeTaskFilter.taskListObjStatus = "completed";
         }
-
-         localStorage.setItem('taskArry',JSON.stringify(taskArry))
 
         randerTask()
 }
