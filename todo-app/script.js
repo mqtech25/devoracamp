@@ -20,6 +20,16 @@ const taskList = document.getElementById('taskList');
 const filterBtn = document.querySelectorAll('.btn-filter');
 const taskStatus = document.getElementById('taskStatus');
 
+
+let localStoreArry= [{"taskListObjId":3126829120651280,"taskListObjTodo":"task1","taskListObjStatus":"active"},{"taskListObjId":4910990130186769,"taskListObjTodo":"task2","taskListObjStatus":"completed"},{"taskListObjId":6145658562635171,"taskListObjTodo":"task3","taskListObjStatus":"active"}];
+
+let checkLocalStoreArry = null;
+
+if(!localStorage.getItem('checkLocalStoreArry')){
+    localStorage.setItem('taskArry',JSON.stringify(localStoreArry))
+    localStorage.setItem('checkLocalStoreArry',true)
+}
+
  
 let taskArry = JSON.parse(localStorage.getItem('taskArry')) || [];
 
@@ -168,57 +178,17 @@ function randerTask(){
 
     taskCount.innerHTML = activeTask.length;
 
-    filterBtn.forEach(function(elem,i){
-        if(elem.classList.contains('active')){
-        console.log(elem);
-        elem.click();
+    filterButtons();
 
-        
-          if(elem.dataset.filter == "completed"){
-            console.log('completes');
-            
-                const checkTaskCompeletEmpty = taskArry.find(task=> task.taskListObjStatus == "completed");
-
-              if(!checkTaskCompeletEmpty){
-                 taskStatus.querySelector('#complete').style.display = "block"
-                taskStatus.querySelector('#empty').style.display = "none"
-            }else{
-                   taskStatus.querySelector('#empty').style.display = "none"
-                taskStatus.querySelector('#complete').style.display = "none"
-            }
-        }else if(elem.dataset.filter == "active"){
-            console.log('acctive');
-
-             if(!taskArry.length){
-                taskStatus.querySelector('#empty').style.display = "block"
-                taskStatus.querySelector('#complete').style.display = "none"
-            }else{
-                   taskStatus.querySelector('#empty').style.display = "none"
-                taskStatus.querySelector('#complete').style.display = "none"
-            }
-        }else if(elem.dataset.filter == "all"){
-            console.log('all');
-
-             if(!taskArry.length){
-                taskStatus.querySelector('#empty').style.display = "block"
-                taskStatus.querySelector('#complete').style.display = "none"
-            } else{
-                   taskStatus.querySelector('#empty').style.display = "none"
-                taskStatus.querySelector('#complete').style.display = "none"
-            }
-        }
-      
-        }
-
-    })
 
     }
 }
 
-filterBtn.forEach(function(elem,i){
+function filterButtons(){
+    filterBtn.forEach(function(elem,i){
   if(elem.classList.contains('active')){
-   console.log(elem);
    elem.click();
+   
   }
 
     elem.addEventListener('click',function(){
@@ -239,7 +209,9 @@ filterBtn.forEach(function(elem,i){
                 elem.style.display ="flex"
             })
 
-             if(!taskArry.length){
+            const checkTaskActiveEmpty = taskArry.filter(task=> task.taskListObjStatus == "active");
+
+             if(!checkTaskActiveEmpty.length){
                 taskStatus.querySelector('#empty').style.display = "block"
                 taskStatus.querySelector('#complete').style.display = "none"
             }else{
@@ -254,16 +226,19 @@ filterBtn.forEach(function(elem,i){
               completedTaskList.forEach(function(elem,i){
                 elem.style.display ="flex"
             })
-                const checkTaskCompeletEmpty = taskArry.find(task=> task.taskListObjStatus == "completed");
-            if(!checkTaskCompeletEmpty){
+                const checkTaskCompeletEmpty = taskArry.filter(task=> task.taskListObjStatus == "completed");
+            if(!checkTaskCompeletEmpty.length){
+                
                  taskStatus.querySelector('#complete').style.display = "block"
                 taskStatus.querySelector('#empty').style.display = "none"
             }else{
+                
                    taskStatus.querySelector('#empty').style.display = "none"
                 taskStatus.querySelector('#complete').style.display = "none"
             }
 
-        }else{
+        }else if(elem.dataset.filter == "all"){
+            
              activeTaskList.forEach(function(elem,i){
                 elem.style.display ="flex"
             })
@@ -280,8 +255,29 @@ filterBtn.forEach(function(elem,i){
             }
         }
     })
+
+    window.addEventListener('DOMContentLoaded',function(){
+        const activeTaskList = taskList.querySelectorAll('.todo-app-container-task-list-item[data-status="active"]')
+        const completedTaskList = taskList.querySelectorAll('.todo-app-container-task-list-item[data-status="completed"]')
+
+            activeTaskList.forEach(function(elem,i){
+                elem.style.display ="flex"
+            })
+            completedTaskList.forEach(function(elem,i){
+                elem.style.display ="flex"
+            })
+
+             if(!taskArry.length){
+                taskStatus.querySelector('#empty').style.display = "block"
+                taskStatus.querySelector('#complete').style.display = "none"
+            } else{
+                   taskStatus.querySelector('#empty').style.display = "none"
+                taskStatus.querySelector('#complete').style.display = "none"
+            }
+    })
     
 })
+}
 
 
 

@@ -147,6 +147,9 @@ div#taskStatus {
 .todo-app-container-task-complete-task img.clear-task {
     width: 20px;
 }
+#taskStatus #empty{
+    display: none;
+}
 #taskStatus #complete{
     display: none;
 }
